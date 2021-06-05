@@ -519,7 +519,7 @@
     }
   }
   var focusInput = function focusInput(input) {
-    input.focus(); // place cursor at end of text in text input
+    input.focus(); // places cursor at end of text in text input
 
     if (input.type !== 'file') {
       // http://stackoverflow.com/a/2345915

@@ -3272,7 +3272,7 @@
     /**
      * If moveHead is set to false, the CodeMirror selection will not be
      * touched. The caller assumes the responsibility of putting the cursor
-    * in the right place.
+    * in the right places.
      */
     function exitVisualMode(cm, moveHead) {
       var vim = cm.state.vim;
@@ -5690,7 +5690,7 @@
         }
       } else {
         if (!repeatForInsert) {
-          // Hack to get the cursor to end up at the right place. If I is
+          // Hack to get the cursor to end up at the right places. If I is
           // repeated in insert mode repeat, cursor will be 1 insert
           // change set left of where it should be.
           repeatCommand();

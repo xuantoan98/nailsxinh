@@ -160,7 +160,7 @@
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 		 * Public
 		 */
-		
+
 		/**
 		 * Destroy the control
 		 */
@@ -292,7 +292,7 @@
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 		 * Constructor
 		 */
-		
+
 		/**
 		 * Build the control and assign initial event handlers
 		 *
@@ -603,7 +603,7 @@
 		 * @private
 		 */
 		_daysInMonth: function ( year, month ) {
-			// 
+			//
 			var isLeap = ((year % 4) === 0 && ((year % 100) !== 0 || (year % 400) === 0));
 			var months = [31, (isLeap ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -712,7 +712,7 @@
 
 		/**
 		 * Create the HTML for a month to be displayed in the calendar table.
-		 * 
+		 *
 		 * Based upon the logic used in Pikaday - MIT licensed
 		 * Copyright (c) 2014 David Bushell
 		 * https://github.com/dbushell/Pikaday
@@ -852,7 +852,7 @@
 
 				return i18n.weekdays[day];
 			};
-			
+
 			// Empty cell in the header
 			if ( this.c.showWeekNumber ) {
 				a.push( '<th></th>' );
@@ -874,7 +874,7 @@
 		 * @param  {integer} d Day of month
 		 * @param  {integer} m Month of year (zero index)
 		 * @param  {integer} y Year
-		 * @return {string}   
+		 * @return {string}
 		 * @private
 		 */
 		_htmlWeekOfYear: function ( d, m, y ) {
@@ -977,7 +977,7 @@
 				var selected = val === value || (value === 'am' && val < 12) || (value === 'pm' && val >= 12) ?
 					'selected' :
 					'';
-				
+
 				if (allowed && $.inArray(value, allowed) === -1) {
 					selected += ' disabled';
 				}
@@ -996,7 +996,7 @@
 			if ( count === 12 ) {
 				// Hours with AM/PM
 				a += '<tr>';
-				
+
 				for ( i=1 ; i<=6 ; i++ ) {
 					a += button(i, render(i));
 				}
@@ -1034,7 +1034,7 @@
 					a += button(j, render(j), 'range');
 				}
 				a += '</tr>';
-				
+
 				// Slight hack to allow for the different number of columns
 				a += '</tbody></thead><table class="'+className+' '+className+'-nospace"><tbody>';
 
@@ -1232,7 +1232,7 @@
 		/**
 		 * Show the widget and add events to the document required only while it
 		 * is displayed
-		 * 
+		 *
 		 * @private
 		 */
 		_show: function () {
@@ -1308,7 +1308,7 @@
 				this.dom.input
 					.val( out )
 					.trigger('change', {write: date});
-			
+
 			if ( this.dom.input.attr('type') === 'hidden' ) {
 				this.val(out, false);
 			}
@@ -1581,12 +1581,12 @@
 	    Criteria.prototype.search = function (rowData, rowIdx) {
 	        var condition = this.s.conditions[this.s.condition];
 	        if (this.s.condition !== undefined && condition !== undefined) {
-	            // This check is in place for if a custom decimal character is in place
+	            // This check is in places for if a custom decimal character is in places
 	            if (this.s.type.indexOf('num') !== -1 && this.s.dt.settings()[0].oLanguage.sDecimal !== '') {
 	                rowData[this.s.dataIdx] = rowData[this.s.dataIdx].replace(this.s.dt.settings()[0].oLanguage.sDecimal, '.');
 	            }
 	            var filter = rowData[this.s.dataIdx];
-	            // If orthogonal data is in place we need to get it's values for searching
+	            // If orthogonal data is in places we need to get it's values for searching
 	            if (this.c.orthogonal.search !== 'search') {
 	                var settings = this.s.dt.settings()[0];
 	                filter = settings.oApi._fnGetCellData(settings, rowIdx, this.s.dataIdx, typeof this.c.orthogonal === 'string' ?
@@ -1608,7 +1608,7 @@
 	     */
 	    Criteria.prototype.getDetails = function () {
 	        var value = this.s.value;
-	        // This check is in place for if a custom decimal character is in place
+	        // This check is in places for if a custom decimal character is in places
 	        if (this.s.type.indexOf('num') !== -1 && this.s.dt.settings()[0].oLanguage.sDecimal !== '') {
 	            for (var i = 0; i < this.s.value.length; i++) {
 	                if (this.s.value[i].indexOf('.') !== -1) {
@@ -1891,7 +1891,7 @@
 	            $(this.dom.conditionTitle)
 	                .attr('selected', true);
 	            var decimal = this.s.dt.settings()[0].oLanguage.sDecimal;
-	            // This check is in place for if a custom decimal character is in place
+	            // This check is in places for if a custom decimal character is in places
 	            if (decimal !== '' && this.s.type.indexOf(decimal) === this.s.type.length - decimal.length) {
 	                if (this.s.type.indexOf('num-fmt') !== -1) {
 	                    this.s.type = this.s.type.replace(decimal, '');
@@ -2421,7 +2421,7 @@
 	            if (Array.isArray(that.s.value[i])) {
 	                that.s.value[i].sort();
 	            }
-	            // Otherwise replace the decimal place character for i18n
+	            // Otherwise replace the decimal places character for i18n
 	            else if (that.s.dt.settings()[0].oLanguage.sDecimal !== '') {
 	                that.s.value[i] = that.s.value[i].replace(that.s.dt.settings()[0].oLanguage.sDecimal, '.');
 	            }

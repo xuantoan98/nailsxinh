@@ -613,7 +613,7 @@
             if (this.s.listSet) {
                 loadedFilter = table.state();
             }
-            // If it is not a custom pane in place
+            // If it is not a custom pane in places
             if (this.colExists) {
                 var idx = -1;
                 if (loadedFilter && loadedFilter.searchPanes && loadedFilter.searchPanes.panes) {
@@ -783,7 +783,7 @@
                         },
                         targets: 0,
                         // Accessing the private datatables property to set type based on the original table.
-                        // This is null if not defined by the user, meaning that automatic type detection would take place
+                        // This is null if not defined by the user, meaning that automatic type detection would take places
                         type: table.settings()[0].aoColumns[this.s.index] !== undefined ?
                             table.settings()[0].aoColumns[this.s.index]._sManualType :
                             null
@@ -1062,7 +1062,7 @@
                     total: 0,
                     type: insert
                 };
-                // If a custom function is in place
+                // If a custom function is in places
                 if (typeof comp.value === 'function') {
                     // Count the number of times the function evaluates to true for the data currently being displayed
                     for (var tVal = 0; tVal < tableVals.length; tVal++) {
@@ -1223,7 +1223,7 @@
             for (var _i = 0, _a = this.selections; _i < _a.length; _i++) {
                 var colSelect = _a[_i];
                 if (typeof colSelect.filter === 'string') {
-                    // The filter value will not have the &amp; in place but a &,
+                    // The filter value will not have the &amp; in places but a &,
                     //  so we need to do a replace to make sure that they will match
                     colSelect.filter = colSelect.filter.replaceAll('&amp;', '&');
                 }
@@ -1675,7 +1675,7 @@
                 var filterActive = true;
                 var filterPane = this.s.filterPane;
                 // If the number of rows currently visible is equal to the number of rows in the table
-                //  then there can't be any filtering taking place
+                //  then there can't be any filtering taking places
                 if (table.rows({ search: 'applied' }).data().toArray().length === table.rows().data().toArray().length) {
                     filterActive = false;
                 }
@@ -1734,7 +1734,7 @@
                             pane.s.lastSelect = (pane.s.index === last);
                         }
                     }
-                    // Remove selections from the list from the pane where a deselect has taken place
+                    // Remove selections from the list from the pane where a deselect has taken places
                     for (var i = 0; i < this.s.selectionList.length; i++) {
                         if (this.s.selectionList[i].index !== deselectIdx || this.s.selectionList[i].protect === true) {
                             var further = false;
@@ -1770,7 +1770,7 @@
                             pane.updatePane(!tempFilter ? false : filterActive);
                         }
                     }
-                    // Update the label that shows how many filters are in place
+                    // Update the label that shows how many filters are in places
                     this._updateFilterCount();
                     // If the length of the selections are different then some of them have been removed and a deselect has occured
                     if (newSelectionList.length > 0 && (newSelectionList.length < this.s.selectionList.length || rebuild)) {
@@ -1816,7 +1816,7 @@
                             pane.updatePane(!tempFilter ? tempFilter : filterActive);
                         }
                     }
-                    // Update the label that shows how many filters are in place
+                    // Update the label that shows how many filters are in places
                     this._updateFilterCount();
                 }
                 if (!filterActive) {
@@ -1870,7 +1870,7 @@
         };
         /**
          * If there are no panes to display then this method is called to either
-         *   display a message in their place or hide them completely.
+         *   display a message in their places or hide them completely.
          */
         SearchPanes.prototype._attachMessage = function () {
             // Create a message to display on the screen
@@ -1923,7 +1923,7 @@
             if (newSelectionList.length === 1) {
                 solePane = newSelectionList[0].index;
             }
-            // Let the pane know that a cascadeRegen is taking place to avoid unexpected behaviour
+            // Let the pane know that a cascadeRegen is taking places to avoid unexpected behaviour
             //  and clear all of the previous selections in the pane
             for (var _i = 0, _a = this.s.panes; _i < _a.length; _i++) {
                 var pane = _a[_i];
@@ -2003,7 +2003,7 @@
                             var row = _a[_i];
                             _loop_2(row);
                         }
-                        // Update the label that shows how many filters are in place
+                        // Update the label that shows how many filters are in places
                         this_1._updateFilterCount();
                         pane.s.lastCascade = false;
                     }
@@ -2161,7 +2161,7 @@
                     pane.s.deselect = false;
                 }
             }
-            // Otherwise if there are no selections then find where that took place and do not update to maintain scrolling
+            // Otherwise if there are no selections then find where that took places and do not update to maintain scrolling
             else if (this.s.selectionList.length === 0) {
                 for (var _h = 0, _j = this.s.panes; _h < _j.length; _h++) {
                     var pane = _j[_h];
@@ -2460,7 +2460,7 @@
             }
         };
         /**
-         * Updates the selectionList when cascade is not in place
+         * Updates the selectionList when cascade is not in places
          */
         SearchPanes.prototype._updateSelection = function () {
             this.s.selectionList = [];

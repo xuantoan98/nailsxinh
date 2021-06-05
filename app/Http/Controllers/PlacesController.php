@@ -8,6 +8,16 @@ class PlacesController extends Controller
 {
     public function index()
     {
-        return view('place.index');
+        return view('places.index');
+    }
+
+    public function create()
+    {
+        return view('places.add');
+    }
+
+    public function store()
+    {
+
     }
 }

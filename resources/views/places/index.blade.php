@@ -9,9 +9,22 @@
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include('partials.content-header', ['key' => 'Danh sách cơ sở', 'name' => 'Cơ sở'])
-    <!-- /.content-header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-uppercase">Danh sách Cở sở</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6" style="float: right; text-align: right;">
+                    <a href="{{ route('places.create') }}" class="btn m-b-sm btn-sm btn-success btnAddPlaces pull-right m-l btn-addon">
+                        <i class="fa fa-plus"></i> Thêm mới cơ sở
+                    </a>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
 
+    <!-- /.content-header -->
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">

@@ -7,6 +7,7 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\SchedulesController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\CategoriesServicesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,11 @@ Route::prefix('places')->group(function () {
         '/',
         [PlacesController::class, 'index']
     )->name('places.index');
+
+    Route::get(
+        '/create',
+        [PlacesController::class, 'create']
+    )->name('places.create');
 });
 
 /**
@@ -71,4 +77,34 @@ Route::prefix('schedules')->group(function () {
         '/',
         [SchedulesController::class, 'index']
     )->name('schedules.index');
+});
+
+/**
+ * Route Categories Services
+ */
+Route::prefix('categoriesServices')->group(function () {
+    Route::get(
+        '/',
+        [CategoriesServicesController::class, 'index']
+    )->name('categoriesServices.index');
+
+    Route::get(
+        '/create',
+        [CategoriesServicesController::class, 'create']
+    )->name('categoriesServices.create');
+
+    Route::post(
+        '/store',
+        [CategoriesServicesController::class, 'store']
+    )->name('categoriesServices.store');
+
+    Route::get(
+        '/edit/{id}',
+        [CategoriesServicesController::class, 'edit']
+    )->name('categoriesServices.edit');
+
+    Route::get(
+        '/delete/{id}',
+        [CategoriesServicesController::class, 'delete']
+    )->name('categoriesServices.delete');
 });

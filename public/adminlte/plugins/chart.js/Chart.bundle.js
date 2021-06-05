@@ -1532,7 +1532,7 @@ function getAlpha(string) {
 // generators
 function hexString(rgba, a) {
    var a = (a !== undefined && rgba.length === 3) ? a : rgba[3];
-   return "#" + hexDouble(rgba[0]) 
+   return "#" + hexDouble(rgba[0])
               + hexDouble(rgba[1])
               + hexDouble(rgba[2])
               + (
@@ -7366,7 +7366,7 @@ var core_layouts = {
 
 		handleMaxPadding(chartArea);
 
-		// Finally place the boxes to correct coordinates
+		// Finally places the boxes to correct coordinates
 		placeBoxes(boxes.leftAndTop, chartArea, params);
 
 		// Move to opposite side of chart
@@ -11351,7 +11351,7 @@ function calculateSpacing(majorIndices, ticks, axisLength, ticksLimit) {
 	var spacing = (ticks.length - 1) / ticksLimit;
 	var factors, factor, i, ilen;
 
-	// If the major ticks are evenly spaced apart, place the minor ticks
+	// If the major ticks are evenly spaced apart, places the minor ticks
 	// so that they divide the major ticks into even chunks
 	if (!evenMajorSpacing) {
 		return Math.max(spacing, 1);

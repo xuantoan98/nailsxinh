@@ -143,11 +143,11 @@ $.extend( FixedHeader.prototype, {
 		$(window).off( this.s.namespace );
 
 		if ( this.c.header ) {
-			this._modeChange( 'in-place', 'header', true );
+			this._modeChange( 'in-places', 'header', true );
 		}
 
 		if ( this.c.footer && this.dom.tfoot.length ) {
-			this._modeChange( 'in-place', 'footer', true );
+			this._modeChange( 'in-places', 'footer', true );
 		}
 	},
 
@@ -173,9 +173,9 @@ $.extend( FixedHeader.prototype, {
 	{
 		return this.s.enable;
 	},
-	
+
 	/**
-	 * Set header offset 
+	 * Set header offset
 	 *
 	 * @param  {int} new value for headerOffset
 	 */
@@ -188,7 +188,7 @@ $.extend( FixedHeader.prototype, {
 
 		return this.c.headerOffset;
 	},
-	
+
 	/**
 	 * Set footer offset
 	 *
@@ -204,9 +204,9 @@ $.extend( FixedHeader.prototype, {
 		return this.c.footerOffset;
 	},
 
-	
+
 	/**
-	 * Recalculate the position of the fixed elements and force them into place
+	 * Recalculate the position of the fixed elements and force them into places
 	 */
 	update: function ()
 	{
@@ -227,7 +227,7 @@ $.extend( FixedHeader.prototype, {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Constructor
 	 */
-	
+
 	/**
 	 * FixedHeader constructor - adding the required event listeners and
 	 * simple initialisation
@@ -276,7 +276,7 @@ $.extend( FixedHeader.prototype, {
 	 */
 
 	/**
-	 * Clone a fixed item to act as a place holder for the original element
+	 * Clone a fixed item to act as a places holder for the original element
 	 * which is moved into a clone of the table element, and moved around the
 	 * document to give the fixed effect.
 	 *
@@ -408,11 +408,11 @@ $.extend( FixedHeader.prototype, {
 	 * Change from one display mode to another. Each fixed item can be in one
 	 * of:
 	 *
-	 * * `in-place` - In the main DataTable
+	 * * `in-places` - In the main DataTable
 	 * * `in` - Floating over the DataTable
 	 * * `below` - (Header only) Fixed to the bottom of the table body
 	 * * `above` - (Footer only) Fixed to the top of the table body
-	 * 
+	 *
 	 * @param  {string}  mode        Mode that the item should be shown in
 	 * @param  {string}  item        'header' or 'footer'
 	 * @param  {boolean} forceChange Force a redraw of the mode, even if already
@@ -438,12 +438,12 @@ $.extend( FixedHeader.prototype, {
 		var focus = $.contains( tablePart[0], document.activeElement ) ?
 			document.activeElement :
 			null;
-		
+
 		if ( focus ) {
 			focus.blur();
 		}
 
-		if ( mode === 'in-place' ) {
+		if ( mode === 'in-places' ) {
 			// Insert the header back into the table's real header
 			if ( itemDom.placeholder ) {
 				itemDom.placeholder.remove();
@@ -574,10 +574,10 @@ $.extend( FixedHeader.prototype, {
 
 		if ( this.c.header ) {
 			if ( ! this.s.enable ) {
-				headerMode = 'in-place';
+				headerMode = 'in-places';
 			}
 			else if ( ! position.visible || windowTop <= position.theadTop - this.c.headerOffset ) {
-				headerMode = 'in-place';
+				headerMode = 'in-places';
 			}
 			else if ( windowTop <= position.tfootTop - position.theadHeight - this.c.headerOffset ) {
 				headerMode = 'in';
@@ -595,10 +595,10 @@ $.extend( FixedHeader.prototype, {
 
 		if ( this.c.footer && this.dom.tfoot.length ) {
 			if ( ! this.s.enable ) {
-				footerMode = 'in-place';
+				footerMode = 'in-places';
 			}
 			else if ( ! position.visible || windowTop + position.windowHeight >= position.tfootBottom + this.c.footerOffset ) {
-				footerMode = 'in-place';
+				footerMode = 'in-places';
 			}
 			else if ( position.windowHeight + windowTop > position.tbodyTop + position.tfootHeight + this.c.footerOffset ) {
 				footerMode = 'in';

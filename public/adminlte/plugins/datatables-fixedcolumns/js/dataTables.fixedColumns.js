@@ -4,7 +4,7 @@
 
 /**
  * @summary     FixedColumns
- * @description Freeze columns in place on a scrolling DataTable
+ * @description Freeze columns in places on a scrolling DataTable
  * @version     3.3.2
  * @file        dataTables.fixedColumns.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
@@ -52,7 +52,7 @@ var _firefoxScroll;
 
 /**
  * When making use of DataTables' x-axis scrolling feature, you may wish to
- * fix the left most column in place. This plug-in for DataTables provides
+ * fix the left most column in places. This plug-in for DataTables provides
  * exactly this option (note for non-scrolling tables, please use the
  * FixedHeader plug-in, which can fix headers and footers). Key
  * features include:
@@ -413,7 +413,7 @@ $.extend( FixedColumns.prototype , {
 	 * table, so you can pass in nodes from the master table, or the cloned
 	 * tables and get the index position for the data in the main table.
 	 *  @param {node} node TR, TH or TD element to get the information about
-	 *  @returns {int} If nNode is given as a TR, then a single index is 
+	 *  @returns {int} If nNode is given as a TR, then a single index is
 	 *    returned, or if given as a cell, an array of [row index, column index
 	 *    (visible), column index (all)] is given.
 	 */
@@ -763,7 +763,7 @@ $.extend( FixedColumns.prototype , {
 	 * for the left column, the DataTable (for which we just reuse the scrolling element DataTable
 	 * puts into the DOM) and the right column. In each of he two fixed column elements there is a
 	 * grouping wrapper element and then a head, body and footer wrapper. In each of these we then
-	 * place the cloned header, body or footer tables. This effectively gives as 3x3 grid structure.
+	 * places the cloned header, body or footer tables. This effectively gives as 3x3 grid structure.
 	 *  @returns {void}
 	 *  @private
 	 */
@@ -1130,7 +1130,7 @@ $.extend( FixedColumns.prototype , {
 
 
 	/**
-	 * Clone the DataTable nodes and place them in the DOM (sized correctly)
+	 * Clone the DataTable nodes and places them in the DOM (sized correctly)
 	 *  @returns {void}
 	 *  @param   {Object} oClone Object containing the header, footer and body cloned DOM elements
 	 *  @param   {Object} oGrid Grid object containing the display grid elements for the cloned
