@@ -1,0 +1,20 @@
+
++ Run project Laravel from git
+	composer install
+	npm install (nếu có)
+	php artisan key:generate
+	php artisan migrate
+	php artisan serve
+
++ Create controller
+	php artisan make:controller "Tên controller"
+
++ Create model
+	php artisan make:model "Tên model" -m  		(-m: tạo file migration)
+	php artisan migrate
+	
++ Add column into table
+	php artisan make:migration add_column_"Tên column"_"Tên table" --table="Tên table"
+	php artisan migrate
+
+	

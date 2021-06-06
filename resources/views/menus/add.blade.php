@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Danh mục dịch vụ</title>
+    <title>Menus Page</title>
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-uppercase">Cập nhật danh mục</h1>
+                        <h1 class="m-0 text-uppercase">Thêm mới Menu</h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -20,18 +20,18 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form method="post" action="{{ route('categoriesServices.update', ['id' => $categories->id]) }}">
+                        <form method="post" action="{{route('menus.store')}}">
                             @csrf
                             <div class="form-group">
-                                <label for="nameCateServices">Tên danh mục</label>
-                                <input type="text" class="form-control" value="{{ $categories->name }}" id="nameCateServices" aria-describedby="placeHelp" placeholder="Nhập tên danh mục" name="nameCateServices">
+                                <label for="nameMenu">Tên menu</label>
+                                <input type="text" class="form-control" id="nameMenu" aria-describedby="placeHelp" placeholder="Nhập tên menu" name="nameMenu">
                             </div>
 
                             <div class="form-group">
-                                <label for="cateParent">Danh mục cha</label>
-                                <select class="form-control" id="cateParent" name="cateParent">
-                                    <option value="0">Chọn danh mục cha</option>
-                                    {!! $htmlOptions !!}
+                                <label for="menuParent">Menu cha</label>
+                                <select class="form-control" id="menuParent" name="menuParent">
+                                    <option value="0">Chọn menu cha</option>
+                                    {!! $optionsSelect !!}}
                                 </select>
                             </div>
 

@@ -74,7 +74,7 @@ class CategoriesServicesController extends Controller
         return $htmlOptions;
     }
 
-    public  function edit($id)
+    public function edit($id)
     {
         $categories = $this->categoriesServices->find($id);
         $htmlOptions = $this->getCategoriesServices($categories->parent_id);
@@ -82,10 +82,51 @@ class CategoriesServicesController extends Controller
         return view('categoriesServices.edit', compact('categories', 'htmlOptions'));
     }
 
+    public function update($id, Request $request)
+    {
+        $name = $request->nameCateServices;
+        $parent_id = $request->cateParent;
+
+        if(empty($name)) {
+            $msg = [
+                'status' => 'error',
+                'msg' => "Thông tin không hợp lệ!"
+            ];
+            return redirect()->route('categoriesServices.store');
+        }
+
+        $categoriesServices = $this->categoriesServices->find($id)->update([
+            'name' => $name,
+            'parent_id' => $parent_id,
+            'slug' => Str::slug($name, '-')
+        ]);
+
+        if($categoriesServices) {
+            $msg = [
+                'status' => 'succes',
+                'msg' => "Thêm mới danh mục thành công!"
+            ];
+
+            return redirect()->route('categoriesServices.index')->with($msg);
+        } else {
+            $msg = [
+                'status' => 'error',
+                'msg' => "Thêm mới danh mục thất bại!"
+            ];
+
+            return redirect()->route('categoriesServices.index')->with($msg);
+        }
+    }
+
     public function delete($id)
     {
-        echo "delete: ";
-        var_dump($id);
-        die;
+        $delete = $this->categoriesServices->find($id)->delete();
+        if($delete) {
+            $msg = [
+                'status' => 'succes',
+                'msg' => "Xóa danh mục thành công!"
+            ];
+        }
+        return redirect()->route('categoriesServices.index')->with($msg);
     }
 }
