@@ -58,6 +58,13 @@ Route::prefix('places')->group(function () {
         '/create',
         [PlacesController::class, 'create']
     )->name('places.create');
+
+    Route::post(
+        '/store',
+        [PlacesController::class, 'store']
+    )->name('places.store');
+
+
 });
 
 /**

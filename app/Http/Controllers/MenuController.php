@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use App\Components\MenuRecusive;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class MenuController extends Controller
 {
-    private $menuRecusiveCreate;
+    private $menuRecusive;
     private $menu;
 
     public function __construct(
-        MenuRecusive $menuRecusiveCreate,
+        MenuRecusive $menuRecusive,
         Menu $menu
     )
     {
-        $this->menuRecusiveCreate = $menuRecusiveCreate;
+        $this->menuRecusive = $menuRecusive;
         $this->menu = $menu;
     }
 
@@ -35,7 +36,7 @@ class MenuController extends Controller
 
     public function create()
     {
-        $optionsSelect = $this->menuRecusiveCreate->menuRecusiveCreate();
+        $optionsSelect = $this->menuRecusive->menuRecusiveCreate();
         return view('menus.add', compact('optionsSelect'));
     }
 
@@ -55,7 +56,8 @@ class MenuController extends Controller
         $check = $this->menu->create([
             'name' => $name,
             'parent_id' => intval($parentID),
-            'status' => 0
+            'status' => 0,
+            'slug' => Str::slug($name)
         ]);
 
         if($check) {
@@ -132,5 +134,52 @@ class MenuController extends Controller
 
             return redirect()->route('menus.index')->with($msg);
         }
+    }
+
+    public function edit($id)
+    {
+        $data = $this->menu->find($id);
+        $optionsSelect = $this->menuRecusive->menuRecusiveEdit($data->parent_id);
+        return view('menus.edit', compact('data', 'optionsSelect'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $name = $request->nameMenu;
+        $parentId = $request->menuParent;
+
+        $check = $this->menu->find($id)->update([
+            'name' => $name,
+            'parent_id' => $parentId,
+            'slug' => Str::slug($name)
+        ]);
+
+        if($check) {
+            $msg = [
+                'status' => 'succes',
+                'msg' => "Cập nhât menu thành công!"
+            ];
+
+            return redirect()->route('menus.index')->with($msg);
+        } else {
+            $msg = [
+                'status' => 'error',
+                'msg' => "Cập nhật menu thất bại!"
+            ];
+
+            return redirect()->route('menus.index')->with($msg);
+        }
+    }
+
+    public function delete($id)
+    {
+        $delete = $this->menu->find($id)->delete();
+        if($delete) {
+            $msg = [
+                'status' => 'succes',
+                'msg' => "Xóa menu thành công!"
+            ];
+        }
+        return redirect()->route('menus.listReCall')->with($msg);
     }
 }
