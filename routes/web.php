@@ -10,6 +10,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\CategoriesServicesController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TagsController;
+use App\Http\Controllers\SourcesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,44 @@ Route::prefix('employees')->group(function () {
         [EmployeesController::class, 'index']
     )->name('employees.index');
 });
+
+/**
+ * Route Sources
+ */
+Route::prefix('sources')->group(function () {
+    Route::get(
+        '/',
+        [SourcesController::class, 'index']
+    )->name('sources.index');
+
+    Route::get(
+        '/create',
+        [SourcesController::class, 'create']
+    )->name('sources.create');
+
+    Route::post(
+        '/store',
+        [SourcesController::class, 'store']
+    )->name('sources.store');
+
+    Route::get(
+        '/edit/{id}',
+        [SourcesController::class, 'edit']
+    )->name('sources.edit');
+
+    Route::post(
+        '/update/{id}',
+        [SourcesController::class, 'update']
+    )->name('sources.update');
+
+    Route::get(
+        '/delete/{id}',
+        [SourcesController::class, 'delete']
+    )->name('sources.delete');
+
+
+});
+
 
 /**
  * Route Place

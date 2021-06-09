@@ -171,15 +171,15 @@
 
                     <li>
                         <a href="{{ route('clients.index') }}" class="nav-link">
-                            <i class="icon-question icon"></i>
+                            <i class="icon-users"></i>
                             <span>Quản lý khách hàng</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="{{ route('employees.index') }}" class="nav-link">
-                            <i class="icon-users"></i>
-                            <span>Quản lý nhân viên</span>
+                            <i class="icon-lock"></i>
+                            <span>Quản lý tài khoản</span>
                         </a>
                     </li>
 
@@ -222,6 +222,13 @@
                         <a href="{{ route('menus.index') }}" class="nav-link">
                             <i class="glyphicon glyphicon-th-list"></i>
                             <span>Quản lý menu</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('sources.index') }}" class="nav-link">
+                            <i class="glyphicon glyphicon-th-list"></i>
+                            <span>Quản lý nguồn</span>
                         </a>
                     </li>
 
