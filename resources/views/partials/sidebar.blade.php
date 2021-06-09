@@ -233,6 +233,13 @@
                     </li>
 
                     <li>
+                        <a href="{{ route('channels.index') }}" class="nav-link">
+                            <i class="glyphicon glyphicon-th-list"></i>
+                            <span>Quản lý kênh</span>
+                        </a>
+                    </li>
+
+                    <li>
                         <a href class="auto">
                           <span class="pull-right text-muted">
                             <i class="fa fa-fw fa-angle-right text"></i>

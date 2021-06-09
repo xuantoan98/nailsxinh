@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoriesServicesController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\SourcesController;
+use App\Http\Controllers\ChannelsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,42 @@ Route::prefix('sources')->group(function () {
         '/delete/{id}',
         [SourcesController::class, 'delete']
     )->name('sources.delete');
+});
+
+
+/**
+ * Route Channels
+ */
+Route::prefix('channels')->group(function () {
+    Route::get(
+        '/',
+        [ChannelsController::class, 'index']
+    )->name('channels.index');
+
+    Route::get(
+        '/create',
+        [ChannelsController::class, 'create']
+    )->name('channels.create');
+
+    Route::post(
+        '/store',
+        [ChannelsController::class, 'store']
+    )->name('channels.store');
+
+    Route::get(
+        '/edit/{id}',
+        [ChannelsController::class, 'edit']
+    )->name('channels.edit');
+
+    Route::post(
+        '/update/{id}',
+        [ChannelsController::class, 'update']
+    )->name('channels.update');
+
+    Route::get(
+        '/delete/{id}',
+        [ChannelsController::class, 'delete']
+    )->name('channels.delete');
 
 
 });

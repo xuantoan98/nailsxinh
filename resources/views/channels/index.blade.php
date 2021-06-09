@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Sources Page</title>
+    <title>Channel Page</title>
 @endsection
 
 @section('content')
@@ -18,11 +18,11 @@
                     <div class="bg-light lter b-b wrapper-md">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-uppercase">Danh sách nguồn</h1>
+                                <h1 class="m-0 text-uppercase">Danh sách kênh</h1>
                             </div>
                             <div class="col-sm-6" style="float: right; text-align: right;">
-                                <a href="{{ route('sources.create') }}" class="btn m-b-sm btn-sm btn-success btnAddSources pull-right m-l btn-addon">
-                                    <i class="fa fa-plus"></i> Thêm mới nguồn
+                                <a href="{{ route('channels.create') }}" class="btn m-b-sm btn-sm btn-success btnAddChannels pull-right m-l btn-addon">
+                                    <i class="fa fa-plus"></i> Thêm mới kênh
                                 </a>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Tên nguồn</th>
+                                        <th scope="col">Tên kênh</th>
                                         <th scope="col">Trạng thái</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -49,20 +49,19 @@
                                                 <td>
                                                     <label class="i-switch bg-info m-t-xs m-r">
                                                         @if(intval($item->status) == 0)
-                                                            <input class="publicSources" id="{{ $item->id }}" type="checkbox" checked />
+                                                            <input class="publicChannels" id="{{ $item->id }}" type="checkbox" checked />
                                                             <i></i>
                                                         @else
-                                                            <input class="publicSources" id="{{ $item->id }}" type="checkbox" />
+                                                            <input class="publicChannels" id="{{ $item->id }}" type="checkbox" />
                                                             <i></i>
                                                         @endif
                                                     </label>
                                                 </td>
-{{--                                                <td>{{ $item->status }}</td>--}}
                                                 <td>
-                                                    <a href="{{ route('sources.edit', ['id' => $item->id]) }}" class="text-primary m-t-xs update">
+                                                    <a href="{{ route('channels.edit', ['id' => $item->id]) }}" class="text-primary m-t-xs update">
                                                         <i class="glyphicon glyphicon-pencil"></i> Sửa
                                                     </a>
-                                                    <a href="{{ route('sources.delete', ['id' => $item->id]) }}" class="text-danger m-t-xs delete ms-3">
+                                                    <a href="{{ route('channels.delete', ['id' => $item->id]) }}" class="text-danger m-t-xs delete ms-3">
                                                         <i class="glyphicon glyphicon-trash"></i> Xóa
                                                     </a>
                                                 </td>
