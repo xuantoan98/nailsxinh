@@ -9,6 +9,7 @@ use App\Http\Controllers\SchedulesController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\CategoriesServicesController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\TagsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,8 @@ use App\Http\Controllers\MenuController;
 */
 
 Route::get('/', function () {
-    return view('home');
-})->name('home');
+    return view('test');
+})->name('test');
 
 /**
  * Route Client
@@ -64,7 +65,20 @@ Route::prefix('places')->group(function () {
         [PlacesController::class, 'store']
     )->name('places.store');
 
+    Route::get(
+        '/edit/{id}',
+        [PlacesController::class, 'edit']
+    )->name('places.edit');
 
+    Route::post(
+        '/update/{id}',
+        [PlacesController::class, 'update']
+    )->name('places.update');
+
+    Route::get(
+        '/delete/{id}',
+        [PlacesController::class, 'delete']
+    )->name('places.delete');
 });
 
 /**
@@ -85,6 +99,42 @@ Route::prefix('schedules')->group(function () {
         '/',
         [SchedulesController::class, 'index']
     )->name('schedules.index');
+});
+
+/**
+ * Route Tag
+ */
+Route::prefix('tags')->group(function () {
+    Route::get(
+        '/',
+        [TagsController::class, 'index']
+    )->name('tags.index');
+
+    Route::get(
+        '/create',
+        [TagsController::class, 'create']
+    )->name('tags.create');
+
+    Route::post(
+        '/store',
+        [TagsController::class, 'store']
+    )->name('tags.store');
+
+    Route::get(
+        '/edit/{id}',
+        [TagsController::class, 'edit']
+    )->name('tags.edit');
+
+    Route::post(
+        '/update/{id}',
+        [TagsController::class, 'update']
+    )->name('tags.update');
+
+    Route::get(
+        '/delete/{id}',
+        [TagsController::class, 'delete']
+    )->name('tags.delete');
+
 });
 
 /**

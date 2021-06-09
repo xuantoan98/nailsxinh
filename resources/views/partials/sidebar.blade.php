@@ -74,6 +74,15 @@
           </a>
         </li>
 
+          <li class="nav-item">
+              <a href="{{ route('tags.index') }}" class="nav-link">
+                  <i class="nav-icon fab fa-servicestack"></i>
+                  <p>
+                      Quản lý Tags
+                  </p>
+              </a>
+          </li>
+
         <li class="nav-item">
           <a href="{{ route('schedules.index') }}" class="nav-link">
             <i class="nav-icon fas fa-calendar-plus"></i>

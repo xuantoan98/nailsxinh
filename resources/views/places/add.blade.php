@@ -25,14 +25,34 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form method="post" action="{{route('places.store')}}">
+                        <form method="post" action="{{ route('places.store') }}">
+                            @csrf
                             <div class="form-group">
                                 <label for="namePlace">Tên cơ sở</label>
-                                <input type="text" class="form-control" id="namePlace" aria-describedby="placeHelp" placeholder="Nhập tên cơ sở" name="namePlace">
+                                <input type="text"
+                                       class="form-control"
+                                       id="namePlace"
+                                       aria-describedby="placeHelp"
+                                       placeholder="Nhập tên cơ sở"
+                                       name="namePlace">
                             </div>
+
+                            <div class="form-group">
+                                <label for="phonePlace">Số điện thoại cơ sở</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="phonePlace"
+                                       aria-describedby="phonePlace"
+                                       placeholder="Nhập số điện thoại cơ sở"
+                                       name="phonePlace">
+                            </div>
+
                             <div class="form-group">
                                 <label for="addressPlace">Địa chỉ cơ sở</label>
-                                <textarea class="form-control" id="addressPlace" rows="3" name="addressPlace"></textarea>
+                                <textarea class="form-control"
+                                          id="addressPlace"
+                                          rows="3"
+                                          name="addressPlace"></textarea>
                             </div>
 
                             <div class="form-group">
