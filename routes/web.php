@@ -25,8 +25,14 @@ use App\Http\Controllers\ChannelsController;
 */
 
 Route::get('/', function () {
-    return view('test');
-})->name('test');
+    return view('home');
+})->name('home');
+
+Route::get('/admin', function () {
+    return view('login');
+})->name('login');
+
+
 
 /**
  * Route Client
@@ -117,8 +123,6 @@ Route::prefix('channels')->group(function () {
         '/delete/{id}',
         [ChannelsController::class, 'delete']
     )->name('channels.delete');
-
-
 });
 
 

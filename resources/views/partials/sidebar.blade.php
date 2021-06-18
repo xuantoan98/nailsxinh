@@ -166,7 +166,7 @@
                 <ul class="nav">
 
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span>Navigations</span>
+                        <span>Khách hàng</span>
                     </li>
 
                     <li>
@@ -177,17 +177,25 @@
                     </li>
 
                     <li>
+                        <a href="{{ route('places.index') }}" class="nav-link">
+                            <i class="icon-calendar"></i>
+                            <span>Quản lý đặt lịch</span>
+                        </a>
+                    </li>
+
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span>Nhân sự</span>
+                    </li>
+
+                    <li>
                         <a href="{{ route('employees.index') }}" class="nav-link">
                             <i class="icon-lock"></i>
                             <span>Quản lý tài khoản</span>
                         </a>
                     </li>
 
-                    <li>
-                        <a href="{{ route('places.index') }}" class="nav-link">
-                            <i class="fa fa-map-marker"></i>
-                            <span>Quản lý cơ sở</span>
-                        </a>
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span>Dịch vụ</span>
                     </li>
 
                     <li>
@@ -204,38 +212,14 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="{{ route('tags.index') }}" class="nav-link">
-                            <i class="icon-tag"></i>
-                            <span>Quản lý thẻ</span>
-                        </a>
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span>Cơ sở</span>
                     </li>
 
                     <li>
                         <a href="{{ route('places.index') }}" class="nav-link">
-                            <i class="icon-calendar"></i>
-                            <span>Quản lý đặt lịch</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{{ route('menus.index') }}" class="nav-link">
-                            <i class="glyphicon glyphicon-th-list"></i>
-                            <span>Quản lý menu</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{{ route('sources.index') }}" class="nav-link">
-                            <i class="glyphicon glyphicon-th-list"></i>
-                            <span>Quản lý nguồn</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{{ route('channels.index') }}" class="nav-link">
-                            <i class="glyphicon glyphicon-th-list"></i>
-                            <span>Quản lý kênh</span>
+                            <i class="fa fa-map-marker"></i>
+                            <span>Quản lý cơ sở</span>
                         </a>
                     </li>
 
@@ -245,29 +229,48 @@
                             <i class="fa fa-fw fa-angle-right text"></i>
                             <i class="fa fa-fw fa-angle-down text-active"></i>
                           </span>
-                            {{--                            <b class="badge bg-info pull-right">3</b>--}}
                             <i class="icon-settings"></i>
-                            <span>Cài đặt website</span>
+                            <span>Quản lý website</span>
                         </a>
                         <ul class="nav nav-sub dk">
+
+                            <li>
+
+                            </li>
+
+
+
+                            <li>
+
+                            </li>
+
+                            <li>
+
+                            </li>
+
+                            <li>
+
+                            </li>
+
+
                             <li class="nav-sub-header">
-                                <a href>
-                                    <span>Layout</span>
+                                <a href="{{ route('tags.index') }}" class="nav-link">
+                                    <span>Quản lý thẻ</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="layout_app.html">
-                                    <span>Application</span>
+                                <a href="{{ route('menus.index') }}" class="nav-link">
+                                    <span>Quản lý menu</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="layout_fullwidth.html">
-                                    <span>Full width</span>
+                                <a href="{{ route('sources.index') }}" class="nav-link">
+                                    <span>Quản lý nguồn</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="layout_boxed.html">
-                                    <span>Boxed layout</span>
+                                <a href="{{ route('channels.index') }}" class="nav-link">
+                                    <span>Quản lý kênh</span>
                                 </a>
                             </li>
                         </ul>
