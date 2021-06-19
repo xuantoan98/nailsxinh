@@ -12,6 +12,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\SourcesController;
 use App\Http\Controllers\ChannelsController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,42 @@ Route::prefix('sources')->group(function () {
         '/delete/{id}',
         [SourcesController::class, 'delete']
     )->name('sources.delete');
+});
+
+
+/**
+ * Route Setting
+ */
+Route::prefix('settings')->group(function () {
+    Route::get(
+        '/',
+        [SettingsController::class, 'index']
+    )->name('settings.index');
+
+    Route::get(
+        '/create',
+        [SettingsController::class, 'create']
+    )->name('settings.create');
+
+    Route::post(
+        '/store',
+        [SettingsController::class, 'store']
+    )->name('settings.store');
+
+    Route::get(
+        '/edit/{id}',
+        [SettingsController::class, 'edit']
+    )->name('settings.edit');
+
+    Route::post(
+        '/update/{id}',
+        [SettingsController::class, 'update']
+    )->name('settings.update');
+
+    Route::get(
+        '/delete/{id}',
+        [SettingsController::class, 'delete']
+    )->name('settings.delete');
 });
 
 

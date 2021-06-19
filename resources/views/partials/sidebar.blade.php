@@ -233,27 +233,12 @@
                             <span>Quản lý website</span>
                         </a>
                         <ul class="nav nav-sub dk">
-
                             <li>
-
+                                <a href="{{ route('settings.index') }}" class="nav-link">
+                                    <span>Cài đặt website</span>
+                                </a>
                             </li>
-
-
-
                             <li>
-
-                            </li>
-
-                            <li>
-
-                            </li>
-
-                            <li>
-
-                            </li>
-
-
-                            <li class="nav-sub-header">
                                 <a href="{{ route('tags.index') }}" class="nav-link">
                                     <span>Quản lý thẻ</span>
                                 </a>
