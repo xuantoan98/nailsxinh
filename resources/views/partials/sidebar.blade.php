@@ -177,7 +177,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('places.index') }}" class="nav-link">
+                        <a href="{{ route('schedules.index') }}" class="nav-link">
                             <i class="icon-calendar"></i>
                             <span>Quản lý đặt lịch</span>
                         </a>

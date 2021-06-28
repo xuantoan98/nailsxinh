@@ -33,14 +33,18 @@
                             <div class="col-lg-6">
                                 <form method="post" action="{{ route('channels.store') }}">
                                     @csrf
-                                    <div class="form-group">
+                                    <div class="form-group @error('nameChannel') has-error @enderror">
                                         <label for="nameChannel">Tên nguồn</label>
                                         <input type="text"
                                                class="form-control"
                                                id="nameChannel"
                                                aria-describedby="channelsHelp"
                                                placeholder="Nhập tên kênh"
-                                               name="nameChannel">
+                                               name="nameChannel"
+                                               value="{{ old('nameChannel') }}">
+                                        @error('nameChannel')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">

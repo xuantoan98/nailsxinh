@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Channels;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ChannelsController extends Controller
 {
@@ -27,16 +28,19 @@ class ChannelsController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nameChannel' => 'required|max:155'
+        ], [
+            'nameChannel.required' => 'Tên kênh là bắt buộc',
+            'nameChannel.max' => 'Tên kênh không quá 155 ký tự'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $name = $request->nameChannel;
         $status = $request->status;
-
-        if(empty($name)) {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thông tin không hợp lệ!"
-            ];
-            return redirect()->route('channels.store');
-        }
 
         $check = $this->channel->create([
             'name' => $name,
@@ -44,17 +48,9 @@ class ChannelsController extends Controller
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'success',
-                'msg' => "Thêm mới kênh thành công!"
-            ];
-            return redirect()->route('channels.index');
+            return redirect()->route('channels.index')->with('success', 'Thêm mới kênh thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thêm mới kênh thất bại!"
-            ];
-            return redirect()->route('channels.store');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra khi tạo kênh!');
         }
     }
 
@@ -66,16 +62,19 @@ class ChannelsController extends Controller
 
     public function update($id, Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nameChannel' => 'required|max:155'
+        ], [
+            'nameChannel.required' => 'Tên kênh là bắt buộc',
+            'nameChannel.max' => 'Tên kênh không quá 155 ký tự'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $name = $request->nameChannel;
         $status = $request->status;
-
-        if(empty($name)) {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thông tin không hợp lệ!"
-            ];
-            return redirect()->route('channels.store');
-        }
 
         $check = $this->channel->find($id)->update([
             'name' => $name,
@@ -83,17 +82,9 @@ class ChannelsController extends Controller
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'success',
-                'msg' => "Cập nhật thông tin thành công!"
-            ];
-            return redirect()->route('channels.index');
+            return redirect()->route('channels.index')->with('success', 'Cập nhật thông tin kênh thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Cập nhật thông tin thất bại!"
-            ];
-            return redirect()->route('channels.store');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra khi cập nhật thông tin kênh!');
         }
     }
 

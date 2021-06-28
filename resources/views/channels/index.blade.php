@@ -21,13 +21,34 @@
                                 <h1 class="m-0 text-uppercase">Danh sách kênh</h1>
                             </div>
                             <div class="col-sm-6" style="float: right; text-align: right;">
-                                <a href="{{ route('channels.create') }}" class="btn m-b-sm btn-sm btn-success btnAddChannels pull-right m-l btn-addon">
+                                <a href="{{ route('channels.create') }}" class="btn m-b-sm btn-sm btn-primary btnAddChannels pull-right m-l btn-addon">
                                     <i class="fa fa-plus"></i> Thêm mới kênh
                                 </a>
                             </div>
                         </div>
                     </div>
                     <!-- / main header -->
+
+                    @if (session('success'))
+                        <div class="alert ng-isolate-scope alert-success alert-dismissable mb-0" ng-class="['alert-' + (type || 'warning'), closeable ? 'alert-dismissable' : null]" role="alert" ng-repeat="alert in alerts" type="success" close="closeAlert($index)">
+                            <button ng-show="closeable" type="button" class="close" ng-click="close()" aria-hidden="false">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <div ng-transclude=""><span class="ng-binding ng-scope">{{ session('success') }}</span></div>
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert ng-isolate-scope alert-danger alert-dismissable mb-0" ng-class="['alert-' + (type || 'warning'), closeable ? 'alert-dismissable' : null]" role="alert" ng-repeat="alert in alerts" type="danger" close="closeAlert($index)">
+                            <button ng-show="closeable" type="button" class="close" ng-click="close()" aria-hidden="false">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <div ng-transclude=""><span class="ng-binding ng-scope">{{ session('error') }}</span></div>
+                        </div>
+                    @endif
+
                     <div class="wrapper-md" ng-controller="FlotChartDemoCtrl">
                         <div class="row">
                             <div class="col-lg-12">
