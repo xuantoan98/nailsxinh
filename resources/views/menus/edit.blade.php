@@ -37,7 +37,7 @@
                             <div class="col-lg-6">
                                 <form method="post" action="{{ route('menus.update', ['id' => $data->id]) }}">
                                     @csrf
-                                    <div class="form-group">
+                                    <div class="form-group @error('nameMenu') has-error @enderror">
                                         <label for="nameMenu">Tên menu</label>
                                         <input type="text"
                                                class="form-control"
@@ -46,10 +46,13 @@
                                                placeholder="Nhập tên menu"
                                                name="nameMenu"
                                                value="{{ $data->name }}">
+                                        @error('nameMenu')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="menuParent">Menu cha</label>
+                                        <label for="menuParent">Menu cha <em class="text-muted">(Mặc định là menu cha)</em></label>
                                         <select class="form-control" id="menuParent" name="menuParent">
                                             <option value="0">Chọn menu cha</option>
                                             {!! $optionsSelect !!}}

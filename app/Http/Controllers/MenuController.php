@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Components\MenuRecusive;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class MenuController extends Controller
@@ -42,16 +43,19 @@ class MenuController extends Controller
 
     public function store(Request  $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nameMenu' => 'required|max:50'
+        ], [
+            'nameMenu.required' => 'Tên menu là bắt buộc',
+            'nameMenu.max' => 'Tên menu không quá 50 ký tự'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $name = $request->nameMenu;
         $parentID = $request->menuParent;
-
-        if(empty($name)) {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thông tin không hợp lệ!"
-            ];
-            return redirect()->route('menus.store');
-        }
 
         $check = $this->menu->create([
             'name' => $name,
@@ -61,42 +65,26 @@ class MenuController extends Controller
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'succes',
-                'msg' => "Thêm mới menu thành công!"
-            ];
-
-            return redirect()->route('menus.index')->with($msg);
+            return redirect()->route('menus.index')->with('success', 'Thêm mới menu thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thêm mới menu thất bại!"
-            ];
-
-            return redirect()->route('menus.index')->with($msg);
+            return redirect()->back()->with('error', 'Có lỗi xảy ra khi tạo menu!');
         }
     }
 
     public function recall($id)
     {
+        if(empty($id)) {
+            return redirect()->back()->with('error', 'Menu không tồn tại!');
+        }
+
         $check = $this->menu->find($id)->update([
             'status' => 1
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'succes',
-                'msg' => "Thu hồi menu thành công!"
-            ];
-
-            return redirect()->route('menus.index')->with($msg);
+            return redirect()->route('menus.index')->with('success', 'Thu hồi menu thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thu hồi menu thất bại!"
-            ];
-
-            return redirect()->route('menus.index')->with($msg);
+            return redirect()->back()->with('error', 'Thu hồi menu thất bại!');
         }
     }
 
@@ -115,24 +103,18 @@ class MenuController extends Controller
 
     public function unRecall($id)
     {
+        if(empty($id)) {
+            return redirect()->back()->with('error', 'Menu không tồn tại!');
+        }
+
         $check = $this->menu->find($id)->update([
             'status' => 0
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'succes',
-                'msg' => "Bỏ Thu hồi menu thành công!"
-            ];
-
-            return redirect()->route('menus.index')->with($msg);
+            return redirect()->route('menus.index')->with('success', 'Bỏ Thu hồi menu thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => " Bỏ thu hồi menu thất bại!"
-            ];
-
-            return redirect()->route('menus.index')->with($msg);
+            return redirect()->back()->with('error', 'Bỏ thu hồi menu thất bại!');
         }
     }
 
@@ -145,6 +127,21 @@ class MenuController extends Controller
 
     public function update($id, Request $request)
     {
+        if(empty($id)) {
+            return redirect()->back()->with('error', 'Menu không tồn tại!');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'nameMenu' => 'required|max:50'
+        ], [
+            'nameMenu.required' => 'Tên menu là bắt buộc',
+            'nameMenu.max' => 'Tên menu không quá 50 ký tự'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $name = $request->nameMenu;
         $parentId = $request->menuParent;
 
@@ -155,19 +152,9 @@ class MenuController extends Controller
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'succes',
-                'msg' => "Cập nhât menu thành công!"
-            ];
-
-            return redirect()->route('menus.index')->with($msg);
+            return redirect()->route('menus.index')->with('success', 'Cập nhât menu thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Cập nhật menu thất bại!"
-            ];
-
-            return redirect()->route('menus.index')->with($msg);
+            return redirect()->back()->with('error', 'Cập nhật menu thất bại!');
         }
     }
 
