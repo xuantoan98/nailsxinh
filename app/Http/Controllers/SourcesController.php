@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Source;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SourcesController extends Controller
 {
@@ -27,16 +28,19 @@ class SourcesController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nameSource' => 'required|max:155'
+        ], [
+            'nameSource.required' => 'Tên nguồn là bắt buộc',
+            'nameSource.max' => 'Tên nguồn không quá 155 ký tự'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $name = $request->nameSource;
         $status = $request->status;
-
-        if(empty($name)) {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thông tin không hợp lệ!"
-            ];
-            return redirect()->route('sources.store');
-        }
 
         $check = $this->source->create([
             'name' => $name,
@@ -44,17 +48,9 @@ class SourcesController extends Controller
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'success',
-                'msg' => "Thêm mới nguồn thành công!"
-            ];
-            return redirect()->route('sources.index');
+            return redirect()->route('sources.index')->with('success', 'Thêm mới nguồn thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thêm mới nguồn thất bại!"
-            ];
-            return redirect()->route('sources.store');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra khi thêm mới thông tin nguồn!');
         }
     }
 
@@ -66,16 +62,19 @@ class SourcesController extends Controller
 
     public function update($id, Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nameSource' => 'required|max:155'
+        ], [
+            'nameSource.required' => 'Tên nguồn là bắt buộc',
+            'nameSource.max' => 'Tên nguồn không quá 155 ký tự'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $name = $request->nameSource;
         $status = $request->status;
-
-        if(empty($name)) {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thông tin không hợp lệ!"
-            ];
-            return redirect()->route('sources.store');
-        }
 
         $check = $this->source->find($id)->update([
             'name' => $name,
@@ -83,17 +82,9 @@ class SourcesController extends Controller
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'success',
-                'msg' => "Cập nhật thông tin thành công!"
-            ];
-            return redirect()->route('sources.index');
+            return redirect()->route('sources.index')->with('success', 'Cập nhật thông tin nguồn thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Cập nhật thông tin thất bại!"
-            ];
-            return redirect()->route('sources.store');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra khi cập nhật thông tin nguồn!');
         }
     }
 

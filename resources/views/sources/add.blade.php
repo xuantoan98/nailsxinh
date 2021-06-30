@@ -33,14 +33,19 @@
                             <div class="col-lg-6">
                                 <form method="post" action="{{ route('sources.store') }}">
                                     @csrf
-                                    <div class="form-group">
+                                    <div class="form-group @error('nameSource') has-error @enderror">
                                         <label for="nameSource">Tên nguồn</label>
                                         <input type="text"
                                                class="form-control"
                                                id="nameSource"
                                                aria-describedby="sourcesHelp"
                                                placeholder="Nhập tên nguồn"
+                                               value="{{ old('nameSource') }}"
                                                name="nameSource">
+
+                                        @error('nameSource')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
