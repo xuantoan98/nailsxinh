@@ -33,7 +33,7 @@
                             <div class="col-lg-6">
                                 <form method="post" action="{{ route('tags.store') }}">
                                     @csrf
-                                    <div class="form-group">
+                                    <div class="form-group @error('nameTag') has-error @enderror">
                                         <label for="namePlace">Tên thẻ</label>
                                         <input type="text"
                                                class="form-control"
@@ -41,6 +41,9 @@
                                                aria-describedby="tagHelp"
                                                placeholder="Nhập tên thẻ"
                                                name="nameTag">
+                                        @error('nameTag')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">

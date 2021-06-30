@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tags;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TagsController extends Controller
 {
@@ -28,16 +29,19 @@ class TagsController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nameTag' => 'required|max:100'
+        ], [
+            'nameTag.required' => 'Tên thẻ là bắt buộc',
+            'nameTag.max' => 'Tên thẻ không quá 100 ký tự'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $name = $request->nameTag;
         $status =  $request->statusTag;
-
-        if(empty($name)) {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thông tin không hợp lệ!"
-            ];
-            return redirect()->route('tags.store');
-        }
 
         $check = $this->tag->create([
             'name' => $name,
@@ -45,17 +49,9 @@ class TagsController extends Controller
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'success',
-                'msg' => "Thêm mới thẻ thành công!"
-            ];
-            return redirect()->route('tags.index');
+            return redirect()->route('tags.index')->with('success', 'Thêm mới thẻ thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thêm mới thẻ thất bại!"
-            ];
-            return redirect()->route('tags.store');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra khi tạo thẻ!');
         }
     }
 
@@ -68,16 +64,19 @@ class TagsController extends Controller
 
     public function update($id, Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nameTag' => 'required|max:100'
+        ], [
+            'nameTag.required' => 'Tên thẻ là bắt buộc',
+            'nameTag.max' => 'Tên thẻ không quá 100 ký tự'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $name = trim($request->nameTag);
         $status = $request->statusTag;
-
-        if(empty($name)) {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thông tin không hợp lệ!"
-            ];
-            return redirect()->route('tags.store');
-        }
 
         $check = $this->tag->find($id)->update([
             'name' => $name,
@@ -85,17 +84,9 @@ class TagsController extends Controller
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'success',
-                'msg' => "Cập nhật thông tin thẻ thành công!"
-            ];
-            return redirect()->route('tags.index');
+            return redirect()->route('tags.index')->with('success', 'Cập nhật thông tin thẻ thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Cập nhật thông tin thẻ thất bại!"
-            ];
-            return redirect()->route('tags.store');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra khi cập nhật thông tin thẻ!');
         }
     }
 

@@ -54,7 +54,7 @@
                             <div class="col-lg-6">
                                 <form method="post" action="{{ route('channels.update', ['id' => $data->id]) }}">
                                     @csrf
-                                    <div class="form-group">
+                                    <div class="form-group @error('nameChannel') has-error @enderror">
                                         <label for="nameChannel">Tên nguồn</label>
                                         <input type="text"
                                                class="form-control"
