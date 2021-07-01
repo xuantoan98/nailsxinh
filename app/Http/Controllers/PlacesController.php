@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Places;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PlacesController extends Controller
 {
@@ -27,18 +28,27 @@ class PlacesController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'namePlace' => 'required|max:155',
+            'phonePlace' => 'required|max:10|min:10',
+            'addressPlace' => 'required'
+        ], [
+            'namePlace.required' => 'Tên cơ sở là bắt buộc',
+            'namePlace.max' => 'Tên cơ sở không quá 155 ký tự',
+            'phonePlace.required' => 'Số điện thoại là bắt buộc',
+            'phonePlace.max' => 'Số điện thoại tối đa 10 ký tự',
+            'phonePlace.min' => 'Số điện thoại tối thiểu 10 ký tự',
+            'addressPlace.required' => 'Địa chỉ cơ sở là bắt buộc'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $name = $request->namePlace;
         $phone = $request->phonePlace;
         $address = trim($request->addressPlace);
         $status = $request->statusPlace;
-
-        if(empty($name) && empty($phone) && empty($address)) {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thông tin không hợp lệ!"
-            ];
-            return redirect()->route('places.store');
-        }
 
         $check = $this->places->create([
             'name' => $name,
@@ -48,17 +58,9 @@ class PlacesController extends Controller
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'success',
-                'msg' => "Thêm mới cơ sở thành công!"
-            ];
-            return redirect()->route('places.index');
+            return redirect()->route('places.index')->with('success', 'Thêm mới cơ sở thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thêm mới cơ sở thất bại!"
-            ];
-            return redirect()->route('places.store');
+            return redirect()->back()->with('error', 'Thêm mới cơ sở thất bại!');
         }
     }
 
@@ -70,18 +72,27 @@ class PlacesController extends Controller
 
     public function update($id, Request  $request)
     {
+        $validator = Validator::make($request->all(), [
+            'namePlace' => 'required|max:155',
+            'phonePlace' => 'required|max:10|min:10',
+            'addressPlace' => 'required'
+        ], [
+            'namePlace.required' => 'Tên cơ sở là bắt buộc',
+            'namePlace.max' => 'Tên cơ sở không quá 155 ký tự',
+            'phonePlace.required' => 'Số điện thoại là bắt buộc',
+            'phonePlace.max' => 'Số điện thoại tối đa 10 ký tự',
+            'phonePlace.min' => 'Số điện thoại tối thiểu 10 ký tự',
+            'addressPlace.required' => 'Địa chỉ cơ sở là bắt buộc'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $name = $request->namePlace;
         $phone = $request->phonePlace;
         $address = trim($request->addressPlace);
         $status = $request->statusPlace;
-
-        if(empty($name) && empty($phone) && empty($address)) {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thông tin không hợp lệ!"
-            ];
-            return redirect()->route('places.store');
-        }
 
         $check = $this->places->find($id)->update([
             'name' => $name,
@@ -91,17 +102,9 @@ class PlacesController extends Controller
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'success',
-                'msg' => "Cập nhật cơ sở thành công!"
-            ];
-            return redirect()->route('places.index');
+            return redirect()->route('places.index')->with('success', 'Cập nhật cơ sở thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Cập nhật cơ sở thất bại!"
-            ];
-            return redirect()->route('places.store');
+            return redirect()->back()->with('error', 'Cập nhật cơ sở thất bại!');
         }
     }
 

@@ -37,7 +37,7 @@
                             <div class="col-lg-6">
                                 <form method="post" action="{{ route('places.update', ['id' => $data->id]) }}">
                                     @csrf
-                                    <div class="form-group">
+                                    <div class="form-group @error('namePlace') has-error @enderror">
                                         <label for="namePlace">Tên cơ sở</label>
                                         <input type="text"
                                                class="form-control"
@@ -47,9 +47,12 @@
                                                name="namePlace"
                                                value="{{ $data->name }}"
                                         >
+                                        @error('namePlace')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group @error('phonePlace') has-error @enderror">
                                         <label for="phonePlace">Số điện thoại cơ sở</label>
                                         <input type="text"
                                                class="form-control"
@@ -59,15 +62,21 @@
                                                name="phonePlace"
                                                value="{{ $data->phone_number }}"
                                         >
+                                        @error('phonePlace')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group @error('addressPlace') has-error @enderror">
                                         <label for="addressPlace">Địa chỉ cơ sở</label>
                                         <textarea class="form-control"
                                                   id="addressPlace"
                                                   rows="3"
                                                   name="addressPlace">
                                     {{ $data->address }}</textarea>
+                                        @error('addressPlace')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">

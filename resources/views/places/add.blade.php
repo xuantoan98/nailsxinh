@@ -38,32 +38,43 @@
                             <div class="col-lg-6">
                                 <form method="post" action="{{ route('places.store') }}">
                                     @csrf
-                                    <div class="form-group">
+                                    <div class="form-group @error('namePlace') has-error @enderror">
                                         <label for="namePlace">Tên cơ sở</label>
                                         <input type="text"
                                                class="form-control"
                                                id="namePlace"
                                                aria-describedby="placeHelp"
                                                placeholder="Nhập tên cơ sở"
+                                               value="{{ old('namePlace') }}"
                                                name="namePlace">
+                                        @error('namePlace')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group @error('phonePlace') has-error @enderror">
                                         <label for="phonePlace">Số điện thoại cơ sở</label>
                                         <input type="text"
                                                class="form-control"
                                                id="phonePlace"
                                                aria-describedby="phonePlace"
                                                placeholder="Nhập số điện thoại cơ sở"
+                                               value="{{ old('phonePlace') }}"
                                                name="phonePlace">
+                                        @error('phonePlace')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group @error('addressPlace') has-error @enderror">
                                         <label for="addressPlace">Địa chỉ cơ sở</label>
                                         <textarea class="form-control"
                                                   id="addressPlace"
                                                   rows="3"
-                                                  name="addressPlace"></textarea>
+                                                  name="addressPlace"> {{ old('addressPlace') }}</textarea>
+                                        @error('addressPlace')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">

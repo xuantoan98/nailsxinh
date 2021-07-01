@@ -21,16 +21,37 @@
                     <div class="bg-light lter b-b wrapper-md">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-uppercase">Danh sách Cở sở</h1>
+                                <h1 class="m-0 text-uppercase">Danh sách Cơ sở</h1>
                             </div><!-- /.col -->
                             <div class="col-sm-6" style="float: right; text-align: right;">
-                                <a href="{{ route('places.create') }}" class="btn m-b-sm btn-sm btn-success btnAddPlaces pull-right m-l btn-addon">
+                                <a href="{{ route('places.create') }}" class="btn m-b-sm btn-sm btn-primary btnAddPlaces pull-right m-l btn-addon">
                                     <i class="fa fa-plus"></i> Thêm mới cơ sở
                                 </a>
                             </div>
                         </div>
                     </div>
                     <!-- / main header -->
+
+                    @if (session('success'))
+                        <div class="alert ng-isolate-scope alert-success alert-dismissable mb-0" ng-class="['alert-' + (type || 'warning'), closeable ? 'alert-dismissable' : null]" role="alert" ng-repeat="alert in alerts" type="success" close="closeAlert($index)">
+                            <button ng-show="closeable" type="button" class="close" ng-click="close()" aria-hidden="false">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <div ng-transclude=""><span class="ng-binding ng-scope">{{ session('success') }}</span></div>
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert ng-isolate-scope alert-danger alert-dismissable mb-0" ng-class="['alert-' + (type || 'warning'), closeable ? 'alert-dismissable' : null]" role="alert" ng-repeat="alert in alerts" type="danger" close="closeAlert($index)">
+                            <button ng-show="closeable" type="button" class="close" ng-click="close()" aria-hidden="false">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <div ng-transclude=""><span class="ng-binding ng-scope">{{ session('error') }}</span></div>
+                        </div>
+                    @endif
+
                     <div class="wrapper-md" ng-controller="FlotChartDemoCtrl">
                         <div class="row">
                             <div class="col-lg-12">
@@ -53,7 +74,18 @@
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->phone_number }}</td>
                                                 <td>{{ $item->address }}</td>
-                                                <td>{{ $item->status }}</td>
+
+                                                <td>
+                                                    <label class="i-switch bg-info m-t-xs m-r">
+                                                        @if(intval($item->status) == 0)
+                                                            <input class="publicPlaces" id="{{ $item->id }}" type="checkbox" checked />
+                                                            <i></i>
+                                                        @else
+                                                            <input class="publicPlaces" id="{{ $item->id }}" type="checkbox" />
+                                                            <i></i>
+                                                        @endif
+                                                    </label>
+                                                </td>
                                                 <td>
                                                     <a href="{{ route('places.edit', ['id' => $item->id]) }}" class="text-primary m-t-xs update">
                                                         <i class="glyphicon glyphicon-pencil"></i> Sửa
