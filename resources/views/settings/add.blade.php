@@ -28,27 +28,56 @@
                             </div>
                         </div>
                     </div>
+
+                    @if (session('success'))
+                        <div class="alert ng-isolate-scope alert-success alert-dismissable mb-0" ng-class="['alert-' + (type || 'warning'), closeable ? 'alert-dismissable' : null]" role="alert" ng-repeat="alert in alerts" type="success" close="closeAlert($index)">
+                            <button ng-show="closeable" type="button" class="close" ng-click="close()" aria-hidden="false">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <div ng-transclude=""><span class="ng-binding ng-scope">{{ session('success') }}</span></div>
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert ng-isolate-scope alert-danger alert-dismissable mb-0" ng-class="['alert-' + (type || 'warning'), closeable ? 'alert-dismissable' : null]" role="alert" ng-repeat="alert in alerts" type="danger" close="closeAlert($index)">
+                            <button ng-show="closeable" type="button" class="close" ng-click="close()" aria-hidden="false">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <div ng-transclude=""><span class="ng-binding ng-scope">{{ session('error') }}</span></div>
+                        </div>
+                    @endif
+
                     <div class="wrapper-md" ng-controller="FlotChartDemoCtrl">
                         <div class="row">
                             <div class="col-lg-6">
                                 <form method="post" action="{{ route('settings.store') }}">
                                     @csrf
-                                    <div class="form-group">
+                                    <div class="form-group @error('nameSetting') has-error @enderror">
                                         <label for="nameSetting">Tên giá trị</label>
                                         <input type="text"
                                                class="form-control"
                                                id="nameSetting"
                                                placeholder="Nhập tên giá trị"
+                                               value="{{ old('nameSetting') }}"
                                                name="nameSetting">
+                                        @error('nameSetting')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group @error('valueSetting') has-error @enderror">
                                         <label for="valueSetting">Giá trị</label>
                                         <input type="text"
                                                class="form-control"
                                                id="valueSetting"
                                                placeholder="Nhập giá trị"
+                                               value="{{ old('valueSetting') }}"
                                                name="valueSetting">
+                                        @error('valueSetting')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">

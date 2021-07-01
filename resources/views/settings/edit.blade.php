@@ -41,6 +41,9 @@
                                                placeholder="Nhập tên giá trị"
                                                name="nameSetting"
                                                value="{{ $data->name }}">
+                                        @error('nameSetting')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
@@ -51,6 +54,9 @@
                                                placeholder="Nhập giá trị"
                                                name="valueSetting"
                                                value="{{ $data->value }}">
+                                        @error('valueSetting')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">

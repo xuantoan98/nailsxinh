@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Settings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class SettingsController extends Controller
@@ -28,20 +30,30 @@ class SettingsController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nameSetting' => 'required|max:100',
+            'valueSetting' => 'required|max:155'
+        ], [
+            'nameSetting.required' => 'Tên giá trị là bắt buộc',
+            'nameSetting.max' => 'Tên giá trị không quá 100 ký tự',
+            'valueSetting.required' => 'Giá trị là bắt buộc',
+            'valueSetting.max' => 'Giá trị không quá 155 ký tự'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $name = $request->nameSetting;
         $identification = Str::slug($request->nameSetting);
         $value = $request->valueSetting;
         $status = $request->status;
 
-        if(empty($name) || empty($identification) || empty($value)) {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thông tin không hợp lệ!"
-            ];
-            return redirect()->route('settings.store');
-        }
-
         // check identification
+        $checkDuplicate = DB::table('settings')->where('identification', $identification)->get();
+        if($checkDuplicate->isEmpty() != 1) {
+            return redirect()->back()->with('error', 'Cài đặt này đã tồn tại trong hệ thống!');
+        }
 
         $check = $this->setting->create([
             'name' => $name,
@@ -51,17 +63,9 @@ class SettingsController extends Controller
         ]);
 
         if($check) {
-            $msg = [
-                'status' => 'success',
-                'msg' => "Thêm mới giá trị thành công!"
-            ];
-            return redirect()->route('settings.index');
+            return redirect()->route('settings.index')->with('success', 'Thêm mới giá trị thành công!');
         } else {
-            $msg = [
-                'status' => 'error',
-                'msg' => "Thêm mới giá trị thất bại!"
-            ];
-            return redirect()->route('settings.index');
+            return redirect()->back()->with('error', 'Thêm mới giá trị thất bại!');
         }
     }
 
