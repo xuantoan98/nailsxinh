@@ -13,6 +13,7 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\SourcesController;
 use App\Http\Controllers\ChannelsController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -160,6 +161,41 @@ Route::prefix('channels')->group(function () {
         '/delete/{id}',
         [ChannelsController::class, 'delete']
     )->name('channels.delete');
+});
+
+/**
+ * Route Roles
+ */
+Route::prefix('roles')->group(function () {
+    Route::get(
+        '/',
+        [RolesController::class, 'index']
+    )->name('roles.index');
+
+    Route::get(
+        '/create',
+        [RolesController::class, 'create']
+    )->name('roles.create');
+
+    Route::post(
+        '/store',
+        [RolesController::class, 'store']
+    )->name('roles.store');
+
+    Route::get(
+        '/edit/{id}',
+        [RolesController::class, 'edit']
+    )->name('roles.edit');
+
+    Route::post(
+        '/update/{id}',
+        [RolesController::class, 'update']
+    )->name('roles.update');
+
+    Route::get(
+        '/delete/{id}',
+        [RolesController::class, 'delete']
+    )->name('roles.delete');
 });
 
 
