@@ -20,12 +20,12 @@ class SettingsController extends Controller
     public function index()
     {
         $data = $this->setting->latest()->paginate(5);
-        return view('settings.index', compact('data'));
+        return view('admin.settings.index', compact('data'));
     }
 
     public function create()
     {
-        return view('settings.add');
+        return view('admin.settings.add');
     }
 
     public function store(Request $request)
@@ -63,7 +63,7 @@ class SettingsController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('settings.index')->with('success', 'Thêm mới giá trị thành công!');
+            return redirect()->route('admin.settings.index')->with('success', 'Thêm mới giá trị thành công!');
         } else {
             return redirect()->back()->with('error', 'Thêm mới giá trị thất bại!');
         }
@@ -73,7 +73,7 @@ class SettingsController extends Controller
     {
         $id = _decode($id);
         $data = $this->setting->find($id);
-        return view('settings.edit', compact('data'));
+        return view('admin.settings.edit', compact('data'));
     }
 
     public function update($id, Request $request)
@@ -89,7 +89,7 @@ class SettingsController extends Controller
                 'status' => 'error',
                 'msg' => "Thông tin không hợp lệ!"
             ];
-            return redirect()->route('settings.store');
+            return redirect()->route('admin.settings.store');
         }
 
         // check identification
@@ -106,13 +106,13 @@ class SettingsController extends Controller
                 'status' => 'success',
                 'msg' => "Cập nhật giá trị thành công!"
             ];
-            return redirect()->route('settings.index');
+            return redirect()->route('admin.settings.index');
         } else {
             $msg = [
                 'status' => 'error',
                 'msg' => "Cập nhật giá trị thất bại!"
             ];
-            return redirect()->route('settings.index');
+            return redirect()->route('admin.settings.index');
         }
     }
 
@@ -125,13 +125,13 @@ class SettingsController extends Controller
                 'status' => 'success',
                 'msg' => "Xóa giá trị thành công!"
             ];
-            return redirect()->route('settings.index');
+            return redirect()->route('admin.settings.index');
         } else {
             $msg = [
                 'status' => 'error',
                 'msg' => "Xóa giá trị thất bại!"
             ];
-            return redirect()->route('settings.index');
+            return redirect()->route('admin.settings.index');
         }
     }
 

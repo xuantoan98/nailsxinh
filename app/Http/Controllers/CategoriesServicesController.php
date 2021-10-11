@@ -20,13 +20,13 @@ class CategoriesServicesController extends Controller
     {
         $categoriesServices = $this->categoriesServices->latest()->paginate(5);
 
-        return view('categoriesServices.index', compact('categoriesServices'));
+        return view('admin.categoriesServices.index', compact('categoriesServices'));
     }
 
     public function create()
     {
         $htmlOptions = $this->getCategoriesServices($parentId = '');
-        return view('categoriesServices.add', compact('htmlOptions'));
+        return view('admin.categoriesServices.add', compact('htmlOptions'));
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class CategoriesServicesController extends Controller
                 'status' => 'error',
                 'msg' => "Thông tin không hợp lệ!"
             ];
-            return redirect()->route('categoriesServices.store');
+            return redirect()->route('admin.categoriesServices.store');
         }
         $check = $this->categoriesServices->create([
             'name' => $name,
@@ -54,7 +54,7 @@ class CategoriesServicesController extends Controller
                 'msg' => "Thêm mới danh mục thành công!"
             ];
 
-            return redirect()->route('categoriesServices.index')->with($msg);
+            return redirect()->route('admin.categoriesServices.index')->with($msg);
 
 //            return redirect()->route('categoriesServices.index', compact('msg'));
         } else {
@@ -62,7 +62,7 @@ class CategoriesServicesController extends Controller
                 'status' => 'error',
                 'msg' => "Thêm mới danh mục thất bại!"
             ];
-            return redirect()->route('categoriesServices.index', compact('msg'));
+            return redirect()->route('admin.categoriesServices.index', compact('msg'));
         }
     }
 
@@ -79,7 +79,7 @@ class CategoriesServicesController extends Controller
         $categories = $this->categoriesServices->find($id);
         $htmlOptions = $this->getCategoriesServices($categories->parent_id);
 
-        return view('categoriesServices.edit', compact('categories', 'htmlOptions'));
+        return view('admin.categoriesServices.edit', compact('categories', 'htmlOptions'));
     }
 
     public function update($id, Request $request)
@@ -92,7 +92,7 @@ class CategoriesServicesController extends Controller
                 'status' => 'error',
                 'msg' => "Thông tin không hợp lệ!"
             ];
-            return redirect()->route('categoriesServices.store');
+            return redirect()->route('admin.categoriesServices.store');
         }
 
         $categoriesServices = $this->categoriesServices->find($id)->update([
@@ -107,14 +107,14 @@ class CategoriesServicesController extends Controller
                 'msg' => "Thêm mới danh mục thành công!"
             ];
 
-            return redirect()->route('categoriesServices.index')->with($msg);
+            return redirect()->route('admin.categoriesServices.index')->with($msg);
         } else {
             $msg = [
                 'status' => 'error',
                 'msg' => "Thêm mới danh mục thất bại!"
             ];
 
-            return redirect()->route('categoriesServices.index')->with($msg);
+            return redirect()->route('admin.categoriesServices.index')->with($msg);
         }
     }
 
@@ -127,6 +127,6 @@ class CategoriesServicesController extends Controller
                 'msg' => "Xóa danh mục thành công!"
             ];
         }
-        return redirect()->route('categoriesServices.index')->with($msg);
+        return redirect()->route('admin.categoriesServices.index')->with($msg);
     }
 }

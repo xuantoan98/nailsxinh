@@ -18,12 +18,12 @@ class PlacesController extends Controller
     public function index()
     {
         $data = $this->places->latest()->paginate(5);
-        return view('places.index', compact('data'));
+        return view('admin.places.index', compact('data'));
     }
 
     public function create()
     {
-        return view('places.add');
+        return view('admin.places.add');
     }
 
     public function store(Request $request)
@@ -58,7 +58,7 @@ class PlacesController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('places.index')->with('success', 'Thêm mới cơ sở thành công!');
+            return redirect()->route('admin.places.index')->with('success', 'Thêm mới cơ sở thành công!');
         } else {
             return redirect()->back()->with('error', 'Thêm mới cơ sở thất bại!');
         }
@@ -67,7 +67,7 @@ class PlacesController extends Controller
     public function edit($id)
     {
         $data = $this->places->find($id);
-        return view('places.edit', compact('data'));
+        return view('admin.places.edit', compact('data'));
     }
 
     public function update($id, Request  $request)
@@ -102,7 +102,7 @@ class PlacesController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('places.index')->with('success', 'Cập nhật cơ sở thành công!');
+            return redirect()->route('admin.places.index')->with('success', 'Cập nhật cơ sở thành công!');
         } else {
             return redirect()->back()->with('error', 'Cập nhật cơ sở thất bại!');
         }
@@ -116,13 +116,13 @@ class PlacesController extends Controller
                 'status' => 'success',
                 'msg' => "Xóa cơ sở thành công!"
             ];
-            return redirect()->route('places.index');
+            return redirect()->route('admin.places.index');
         } else {
             $msg = [
                 'status' => 'error',
                 'msg' => "Xóa cơ sở thất bại!"
             ];
-            return redirect()->route('places.index');
+            return redirect()->route('admin.places.index');
         }
     }
 }

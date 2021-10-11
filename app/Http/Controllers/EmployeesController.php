@@ -8,6 +8,6 @@ class EmployeesController extends Controller
 {
     public function index()
     {
-        return view('employee.index');
+        return view('admin.employee.index');
     }
 }

@@ -18,12 +18,12 @@ class ChannelsController extends Controller
     public function index()
     {
         $data = $this->channel->latest()->paginate(5);
-        return view('channels.index', compact('data'));
+        return view('admin.channels.index', compact('data'));
     }
 
     public function create()
     {
-        return view('channels.add');
+        return view('admin.channels.add');
     }
 
     public function store(Request $request)
@@ -48,7 +48,7 @@ class ChannelsController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('channels.index')->with('success', 'Thêm mới kênh thành công!');
+            return redirect()->route('admin.channels.index')->with('success', 'Thêm mới kênh thành công!');
         } else {
             return redirect()->back()->with('error', 'Có lỗi xảy ra khi tạo kênh!');
         }
@@ -57,7 +57,7 @@ class ChannelsController extends Controller
     public function edit($id)
     {
         $data = $this->channel->find($id);
-        return view('channels.edit', compact('data'));
+        return view('admin.channels.edit', compact('data'));
     }
 
     public function update($id, Request $request)
@@ -82,7 +82,7 @@ class ChannelsController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('channels.index')->with('success', 'Cập nhật thông tin kênh thành công!');
+            return redirect()->route('admin.channels.index')->with('success', 'Cập nhật thông tin kênh thành công!');
         } else {
             return redirect()->back()->with('error', 'Có lỗi xảy ra khi cập nhật thông tin kênh!');
         }
@@ -96,13 +96,13 @@ class ChannelsController extends Controller
                 'status' => 'success',
                 'msg' => "Xóa kênh thành công!"
             ];
-            return redirect()->route('channels.index');
+            return redirect()->route('admin.channels.index');
         } else {
             $msg = [
                 'status' => 'error',
                 'msg' => "Xóa kênh thất bại!"
             ];
-            return redirect()->route('channels.index');
+            return redirect()->route('admin.channels.index');
         }
     }
 }

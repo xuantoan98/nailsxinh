@@ -20,4 +20,14 @@ class Users extends Model
         'place_id',
         'role_id'
     ];
+
+    public function place()
+    {
+        return $this->belongsTo(Places::class, 'place_id');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Roles::class);
+    }
 }

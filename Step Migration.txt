@@ -17,4 +17,20 @@
 	php artisan make:migration add_column_"Tên column"_"Tên table" --table="Tên table"
 	php artisan migrate
 
+
+Connect server with ssh
+
+Sv Conver new 201
+"Trên Window
+ssh -i D:/AHT/Key/Cd2_new.pem www@13.238.134.106"
+
+Sv Conver new
+"Trên Window
+ssh -i D:/AHT/Key/Cd2_new_201.pem www@13.54.160.201"
+
+"
+Deploy: 
+rm -rf var/log/ var/cache/ var/view_preprocessed/* var/report/*; rm -rf pub/static/*; php -dmemory_limit=6G bin/magento setup:static-content:deploy en_US -f;php -f bin/magento cache:clean;chmod -R 777 var/*;chmod -R 777 pub/static/*;chmod -R 777 generated/*;
+"
+
 	

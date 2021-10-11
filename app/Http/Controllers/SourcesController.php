@@ -18,12 +18,12 @@ class SourcesController extends Controller
     public function index()
     {
         $data = $this->source->latest()->paginate(5);
-        return view('sources.index', compact('data'));
+        return view('admin.sources.index', compact('data'));
     }
 
     public function create()
     {
-        return view('sources.add');
+        return view('admin.sources.add');
     }
 
     public function store(Request $request)
@@ -48,7 +48,7 @@ class SourcesController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('sources.index')->with('success', 'Thêm mới nguồn thành công!');
+            return redirect()->route('admin.sources.index')->with('success', 'Thêm mới nguồn thành công!');
         } else {
             return redirect()->back()->with('error', 'Có lỗi xảy ra khi thêm mới thông tin nguồn!');
         }
@@ -57,7 +57,7 @@ class SourcesController extends Controller
     public function edit($id)
     {
         $data = $this->source->find($id);
-        return view('sources.edit', compact('data'));
+        return view('admin.sources.edit', compact('data'));
     }
 
     public function update($id, Request $request)
@@ -82,7 +82,7 @@ class SourcesController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('sources.index')->with('success', 'Cập nhật thông tin nguồn thành công!');
+            return redirect()->route('admin.sources.index')->with('success', 'Cập nhật thông tin nguồn thành công!');
         } else {
             return redirect()->back()->with('error', 'Có lỗi xảy ra khi cập nhật thông tin nguồn!');
         }
@@ -96,13 +96,13 @@ class SourcesController extends Controller
                 'status' => 'success',
                 'msg' => "Xóa nguồn thành công!"
             ];
-            return redirect()->route('sources.index');
+            return redirect()->route('admin.sources.index');
         } else {
             $msg = [
                 'status' => 'error',
                 'msg' => "Xóa nguồn thất bại!"
             ];
-            return redirect()->route('sources.index');
+            return redirect()->route('admin.sources.index');
         }
     }
 

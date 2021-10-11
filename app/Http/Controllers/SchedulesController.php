@@ -8,6 +8,6 @@ class SchedulesController extends Controller
 {
     public function index()
     {
-        return view('schedule.index');
+        return view('admin.schedule.index');
     }
 }

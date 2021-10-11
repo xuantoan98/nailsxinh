@@ -17,12 +17,12 @@ class RolesController extends Controller
     public function index()
     {
         $data = $this->roles->latest()->paginate(5);
-        return view('roles.index', compact('data'));
+        return view('admin.roles.index', compact('data'));
     }
 
     public function create()
     {
-        return view('roles.add');
+        return view('admin.roles.add');
     }
 
     public function store(Request $request)
@@ -47,7 +47,7 @@ class RolesController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('roles.index')->with('success', 'Thêm mới quyền thành công!');
+            return redirect()->route('admin.roles.index')->with('success', 'Thêm mới quyền thành công!');
         } else {
             return redirect()->back()->with('error', 'Có lỗi xảy ra khi tạo kênh!');
         }
@@ -63,7 +63,7 @@ class RolesController extends Controller
         $id = _decode($id);
         $data = $this->roles->find($id);
 
-        return view('roles.edit', compact('data'));
+        return view('admin.roles.edit', compact('data'));
     }
 
     public function update($id, Request $request)
@@ -82,7 +82,7 @@ class RolesController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('roles.index')->with('success', 'Cập nhật thông tin quyền thành công!');
+            return redirect()->route('admin.roles.index')->with('success', 'Cập nhật thông tin quyền thành công!');
         } else {
             return redirect()->back()->with('error', 'Có lỗi xảy ra khi tạo quyền!');
         }
@@ -97,7 +97,7 @@ class RolesController extends Controller
         $id = _decode($id);
         $check = $this->roles->find($id)->delete();
         if($check) {
-            return redirect()->route('roles.index')->with('success', 'Xóa quyền thành công!');
+            return redirect()->route('admin.roles.index')->with('success', 'Xóa quyền thành công!');
         } else {
             return redirect()->back()->with('error', 'Có lỗi xảy ra khi xóa quyền!');
         }

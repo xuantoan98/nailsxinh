@@ -19,12 +19,12 @@ class TagsController extends Controller
     public function index()
     {
         $data = $this->tag->latest()->paginate(10);
-        return view('tags.index', compact('data'));
+        return view('admin.tags.index', compact('data'));
     }
 
     public function create()
     {
-        return view('tags.add');
+        return view('admin.tags.add');
     }
 
     public function store(Request $request)
@@ -84,7 +84,7 @@ class TagsController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('tags.index')->with('success', 'Cập nhật thông tin thẻ thành công!');
+            return redirect()->route('admin.tags.index')->with('success', 'Cập nhật thông tin thẻ thành công!');
         } else {
             return redirect()->back()->with('error', 'Có lỗi xảy ra khi cập nhật thông tin thẻ!');
         }
@@ -98,13 +98,13 @@ class TagsController extends Controller
                 'status' => 'success',
                 'msg' => "Xóa thẻ thành công!"
             ];
-            return redirect()->route('tags.index');
+            return redirect()->route('admin.tags.index');
         } else {
             $msg = [
                 'status' => 'error',
                 'msg' => "Xóa thẻ thất bại!"
             ];
-            return redirect()->route('tags.index');
+            return redirect()->route('admin.tags.index');
         }
     }
 }

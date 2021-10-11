@@ -93,7 +93,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('employees.index') }}" class="nav-link">
+                        <a href="{{ route('users.index') }}" class="nav-link">
                             <i class="icon-lock"></i>
                             <span>Quản lý tài khoản</span>
                         </a>

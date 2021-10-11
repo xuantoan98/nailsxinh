@@ -93,8 +93,6 @@
                                             <td rowspan="4" class="empty-data">Không có bản ghi nào phù hợp.</td>
                                         </tr>
                                     @endif
-
-
                                     </tbody>
                                 </table>
                             </div>

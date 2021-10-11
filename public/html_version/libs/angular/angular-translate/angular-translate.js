@@ -1916,7 +1916,7 @@ angular.module('pascalprecht.translate')
  *
  * @example
    <example module="ngView">
-    <file name="index.html">
+    <file name="index.blade.php">
       <div ng-controller="TranslateCtrl">
 
         <pre translate="TRANSLATION_ID"></pre>
@@ -2208,7 +2208,7 @@ angular.module('pascalprecht.translate')
  *
  * @example
    <example module="ngView">
-    <file name="index.html">
+    <file name="index.blade.php">
       <div ng-controller="TranslateCtrl">
 
         <pre>{{ 'TRANSLATION_ID' | translate }}</pre>

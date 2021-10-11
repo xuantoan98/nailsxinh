@@ -32,13 +32,13 @@ class MenuController extends Controller
                 'status' => 0
             ];
         }
-        return view('menus.index', compact('data'));
+        return view('admin.menus.index', compact('data'));
     }
 
     public function create()
     {
         $optionsSelect = $this->menuRecusive->menuRecusiveCreate();
-        return view('menus.add', compact('optionsSelect'));
+        return view('admin.menus.add', compact('optionsSelect'));
     }
 
     public function store(Request  $request)
@@ -65,7 +65,7 @@ class MenuController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('menus.index')->with('success', 'Thêm mới menu thành công!');
+            return redirect()->route('admin.menus.index')->with('success', 'Thêm mới menu thành công!');
         } else {
             return redirect()->back()->with('error', 'Có lỗi xảy ra khi tạo menu!');
         }
@@ -82,7 +82,7 @@ class MenuController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('menus.index')->with('success', 'Thu hồi menu thành công!');
+            return redirect()->route('admin.menus.index')->with('success', 'Thu hồi menu thành công!');
         } else {
             return redirect()->back()->with('error', 'Thu hồi menu thất bại!');
         }
@@ -98,7 +98,7 @@ class MenuController extends Controller
                 'status' => 0
             ];
         }
-        return view('menus.recall', compact('data'));
+        return view('admin.menus.recall', compact('data'));
     }
 
     public function unRecall($id)
@@ -112,7 +112,7 @@ class MenuController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('menus.index')->with('success', 'Bỏ Thu hồi menu thành công!');
+            return redirect()->route('admin.menus.index')->with('success', 'Bỏ Thu hồi menu thành công!');
         } else {
             return redirect()->back()->with('error', 'Bỏ thu hồi menu thất bại!');
         }
@@ -122,7 +122,7 @@ class MenuController extends Controller
     {
         $data = $this->menu->find($id);
         $optionsSelect = $this->menuRecusive->menuRecusiveEdit($data->parent_id);
-        return view('menus.edit', compact('data', 'optionsSelect'));
+        return view('admin.menus.edit', compact('data', 'optionsSelect'));
     }
 
     public function update($id, Request $request)
@@ -152,7 +152,7 @@ class MenuController extends Controller
         ]);
 
         if($check) {
-            return redirect()->route('menus.index')->with('success', 'Cập nhât menu thành công!');
+            return redirect()->route('admin.menus.index')->with('success', 'Cập nhât menu thành công!');
         } else {
             return redirect()->back()->with('error', 'Cập nhật menu thất bại!');
         }
@@ -167,6 +167,6 @@ class MenuController extends Controller
                 'msg' => "Xóa menu thành công!"
             ];
         }
-        return redirect()->route('menus.listReCall')->with($msg);
+        return redirect()->route('admin.menus.listReCall')->with($msg);
     }
 }
